@@ -54,7 +54,12 @@ namespace OscopeTools
 
         private void spComm_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            txtReceived.Text += spComm.ReadExisting();
+        }
 
+        private void btnSpSend_Click(object sender, EventArgs e)
+        {
+            spComm.WriteLine(txtSend.Text);
         }
     }
 }

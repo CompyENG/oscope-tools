@@ -94,6 +94,7 @@
             this.btnSpSend.TabIndex = 5;
             this.btnSpSend.Text = "Send";
             this.btnSpSend.UseVisualStyleBackColor = true;
+            this.btnSpSend.Click += new System.EventHandler(this.btnSpSend_Click);
             // 
             // Form1
             // 
