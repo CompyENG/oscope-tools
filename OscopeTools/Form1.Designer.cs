@@ -36,6 +36,13 @@
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.txtSend = new System.Windows.Forms.TextBox();
             this.btnSpSend = new System.Windows.Forms.Button();
+            this.btnGetData = new System.Windows.Forms.Button();
+            this.cmbChannel = new System.Windows.Forms.ComboBox();
+            this.lvOscopeData = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // spComm
@@ -99,11 +106,71 @@
             this.btnSpSend.UseVisualStyleBackColor = true;
             this.btnSpSend.Click += new System.EventHandler(this.btnSpSend_Click);
             // 
+            // btnGetData
+            // 
+            this.btnGetData.Location = new System.Drawing.Point(177, 256);
+            this.btnGetData.Name = "btnGetData";
+            this.btnGetData.Size = new System.Drawing.Size(124, 23);
+            this.btnGetData.TabIndex = 7;
+            this.btnGetData.Text = "Get Oscope Data";
+            this.btnGetData.UseVisualStyleBackColor = true;
+            this.btnGetData.Click += new System.EventHandler(this.btnGetData_Click);
+            // 
+            // cmbChannel
+            // 
+            this.cmbChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChannel.FormattingEnabled = true;
+            this.cmbChannel.Items.AddRange(new object[] {
+            "Channel 1",
+            "Channel 2",
+            "Channel 3",
+            "Channel 4"});
+            this.cmbChannel.Location = new System.Drawing.Point(12, 258);
+            this.cmbChannel.Name = "cmbChannel";
+            this.cmbChannel.Size = new System.Drawing.Size(159, 21);
+            this.cmbChannel.TabIndex = 8;
+            // 
+            // lvOscopeData
+            // 
+            this.lvOscopeData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lvOscopeData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvOscopeData.GridLines = true;
+            this.lvOscopeData.Location = new System.Drawing.Point(307, 8);
+            this.lvOscopeData.Name = "lvOscopeData";
+            this.lvOscopeData.ShowGroups = false;
+            this.lvOscopeData.Size = new System.Drawing.Size(454, 271);
+            this.lvOscopeData.TabIndex = 9;
+            this.lvOscopeData.UseCompatibleStateImageBehavior = false;
+            this.lvOscopeData.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "X Data";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Y Data";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Time";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Voltage";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 261);
+            this.ClientSize = new System.Drawing.Size(773, 291);
+            this.Controls.Add(this.lvOscopeData);
+            this.Controls.Add(this.cmbChannel);
+            this.Controls.Add(this.btnGetData);
             this.Controls.Add(this.btnSpSend);
             this.Controls.Add(this.txtSend);
             this.Controls.Add(this.txtReceived);
@@ -128,6 +195,13 @@
         private System.Windows.Forms.TextBox txtReceived;
         private System.Windows.Forms.TextBox txtSend;
         private System.Windows.Forms.Button btnSpSend;
+        private System.Windows.Forms.Button btnGetData;
+        private System.Windows.Forms.ComboBox cmbChannel;
+        private System.Windows.Forms.ListView lvOscopeData;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 
