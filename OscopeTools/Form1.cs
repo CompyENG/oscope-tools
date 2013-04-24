@@ -12,6 +12,8 @@ namespace OscopeTools
 {
     public partial class Form1 : Form
     {
+        delegate void appendMessageCallback(string text);
+
         public Form1()
         {
             InitializeComponent();
@@ -54,12 +56,34 @@ namespace OscopeTools
 
         private void spComm_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            txtReceived.Text += spComm.ReadExisting();
+            appendMessage(spComm.ReadExisting());
         }
 
         private void btnSpSend_Click(object sender, EventArgs e)
         {
             spComm.WriteLine(txtSend.Text);
+            spComm.ReadTimeout = 1000;
+            /*try
+            {
+                txtReceived.Text += spComm.ReadLine();
+            }
+            catch
+            {
+                MessageBox.Show("Could not read from serial port.");
+            }*/
+        }
+
+        private void appendMessage(string text)
+        {
+            if (txtReceived.InvokeRequired)
+            {
+                appendMessageCallback d = new appendMessageCallback(appendMessage);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtReceived.Text += text;
+            }
         }
     }
 }

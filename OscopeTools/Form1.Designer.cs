@@ -40,7 +40,10 @@
             // 
             // spComm
             // 
+            this.spComm.BaudRate = 19200;
+            this.spComm.DtrEnable = true;
             this.spComm.Handshake = System.IO.Ports.Handshake.XOnXOff;
+            this.spComm.RtsEnable = true;
             this.spComm.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.spComm_DataReceived);
             // 
             // label1
