@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace OscopeTools
 {
@@ -131,11 +132,15 @@ namespace OscopeTools
             // We'll need to read one more byte -- the "end of line" marker.
             spComm.ReadByte();
 
+            // Let's also try graphing
+            DataPointCollection p = chrtOscope.Series[0].Points;
+
             for (int i = 0; i < datab.Length; i++)
             {
                 //Console.WriteLine(String.Format("data[i]: {0} ; {0:X} ; {1} ; {2:X}", data[i], (int)data[i], datab[i]));
                 float v = ((int)datab[i] - float.Parse(preambles[9])) * float.Parse(preambles[7]) + float.Parse(preambles[8]);
                 float t = (i - float.Parse(preambles[6])) * float.Parse(preambles[4]) + float.Parse(preambles[5]);
+                p.Add(new DataPoint(t, v));
                 lvOscopeData.Items.Add(new ListViewItem(new string[] { (i).ToString(), String.Format("{0}", Convert.ToInt32(datab[i])), t.ToString(), v.ToString() }));
             }
 

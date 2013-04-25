@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.spComm = new System.IO.Ports.SerialPort(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.cmbSerialPort = new System.Windows.Forms.ComboBox();
@@ -43,6 +45,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chrtOscope = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chrtOscope)).BeginInit();
             this.SuspendLayout();
             // 
             // spComm
@@ -163,11 +167,26 @@
             // 
             this.columnHeader4.Text = "Voltage";
             // 
+            // chrtOscope
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chrtOscope.ChartAreas.Add(chartArea1);
+            this.chrtOscope.Location = new System.Drawing.Point(13, 286);
+            this.chrtOscope.Name = "chrtOscope";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.chrtOscope.Series.Add(series1);
+            this.chrtOscope.Size = new System.Drawing.Size(748, 276);
+            this.chrtOscope.TabIndex = 10;
+            this.chrtOscope.Text = "chart1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 291);
+            this.ClientSize = new System.Drawing.Size(773, 574);
+            this.Controls.Add(this.chrtOscope);
             this.Controls.Add(this.lvOscopeData);
             this.Controls.Add(this.cmbChannel);
             this.Controls.Add(this.btnGetData);
@@ -181,6 +200,7 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chrtOscope)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,6 +222,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrtOscope;
     }
 }
 
