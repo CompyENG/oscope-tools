@@ -100,32 +100,56 @@ namespace OscopeTools
 
             // Ask for data
             spComm.WriteLine(":WAVEFORM:DATA?");
-            // TODO: I think I'm going to have to do a byte-by-byte read. ReadLine() just isn't acting as I think it should
-            byte[] datab = new byte[110];
-            int read = 0;
-            while (read < 110)
-            {
-                read += spComm.Read(datab, read, 110-read);
-            }
-            //string data = spComm.ReadLine();
-            //byte[] datab = new byte[data.Length * sizeof(char)];
-            //System.Buffer.BlockCopy(data.ToCharArray(), 0, datab, 0, datab.Length);
-            if ((char)datab[0] != '#')
+            // First byte should be a # to indicate fixed-length data
+            byte data = (byte)spComm.ReadByte();
+            if (data != '#')
             {
                 MessageBox.Show("Error: Didn't receive correct format of data.");
+                // Read the rest of the line and discard it. This ensures we're always in the right place
+                spComm.DiscardInBuffer();
                 return;
             }
-            int start = int.Parse(((char)datab[1]).ToString())+2;
+            // Next byte tells how many bytes follow for size
+            data = (byte)spComm.ReadByte();
+            int size_length = Int32.Parse(((char)data).ToString());
+            // Now, receive that many bytes in length
+            byte[] baLength = new byte[size_length];
+            int read = 0;
+            while (read < size_length)
+            {
+                read += spComm.Read(baLength, read, size_length - read);
+            }
+            int length = baToInt(baLength);
 
-            for (int i = start; i < datab.Length; i++)
+            byte[] datab = new byte[length];
+            read = 0;
+            while (read < length)
+            {
+                read += spComm.Read(datab, read, length-read);
+            }
+
+            // We'll need to read one more byte -- the "end of line" marker.
+            spComm.ReadByte();
+
+            for (int i = 0; i < datab.Length; i++)
             {
                 //Console.WriteLine(String.Format("data[i]: {0} ; {0:X} ; {1} ; {2:X}", data[i], (int)data[i], datab[i]));
                 float v = ((int)datab[i] - float.Parse(preambles[9])) * float.Parse(preambles[7]) + float.Parse(preambles[8]);
-                float t = (i - start - float.Parse(preambles[6])) * float.Parse(preambles[4]) + float.Parse(preambles[5]);
-                lvOscopeData.Items.Add(new ListViewItem(new string[] { (i - start).ToString(), String.Format("{0}", Convert.ToInt32(datab[i])), t.ToString(), v.ToString() }));
+                float t = (i - float.Parse(preambles[6])) * float.Parse(preambles[4]) + float.Parse(preambles[5]);
+                lvOscopeData.Items.Add(new ListViewItem(new string[] { (i).ToString(), String.Format("{0}", Convert.ToInt32(datab[i])), t.ToString(), v.ToString() }));
             }
 
             spComm.DataReceived += spComm_DataReceived;
+        }
+
+        private int baToInt(byte[] ba)
+        {
+            int ret = 0;
+            foreach (char c in ba)
+            {
+                ret = ret * 10 + Int32.Parse(c.ToString());
+            }
+            return ret;
         }
     }
 }
