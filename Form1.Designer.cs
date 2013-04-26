@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.spComm = new System.IO.Ports.SerialPort(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.cmbSerialPort = new System.Windows.Forms.ComboBox();
             this.btnSpConnect = new System.Windows.Forms.Button();
@@ -48,14 +46,6 @@
             this.chrtOscope = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chrtOscope)).BeginInit();
             this.SuspendLayout();
-            // 
-            // spComm
-            // 
-            this.spComm.BaudRate = 19200;
-            this.spComm.DtrEnable = true;
-            this.spComm.Handshake = System.IO.Ports.Handshake.XOnXOff;
-            this.spComm.RtsEnable = true;
-            this.spComm.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.spComm_DataReceived);
             // 
             // label1
             // 
@@ -208,7 +198,6 @@
 
         #endregion
 
-        private System.IO.Ports.SerialPort spComm;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbSerialPort;
         private System.Windows.Forms.Button btnSpConnect;
